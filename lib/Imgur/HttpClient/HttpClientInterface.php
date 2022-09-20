@@ -2,6 +2,7 @@
 
 namespace Imgur\HttpClient;
 
+use Imgur\DTO\RateLimits;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -61,7 +62,6 @@ interface HttpClientInterface
      * Parses the Imgur server response headers for RateLimits
      */
     public function parseRateLimits( ResponseInterface $response ): RateLimits;
-
 
     /**
      * Push authorization middleware.
