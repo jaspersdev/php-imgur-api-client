@@ -4,6 +4,7 @@ namespace Imgur;
 
 use Imgur\Api\AbstractApi;
 use Imgur\Auth\AuthInterface;
+use Imgur\DTO\RateLimits;
 use Imgur\Exception\InvalidArgumentException;
 use Imgur\HttpClient\HttpClient;
 use Imgur\HttpClient\HttpClientInterface;
@@ -36,6 +37,11 @@ class Client
      * @var AuthInterface
      */
     private $authenticationClient;
+    
+    /**
+     * @var AbstractApi
+     */
+    private $lastApi;
 
     /**
      * Instantiate a new Imgur client.
@@ -62,9 +68,9 @@ class Client
         $apiClass = 'Imgur\\Api\\' . ucfirst($name);
         if (class_exists($apiClass)) {
             /** @var AbstractApi */
-            $api = new $apiClass($this, $pager);
+            $this->lastApi = new $apiClass($this, $pager);
 
-            return $api;
+            return $this->lastApi;
         }
 
         throw new InvalidArgumentException('API Method not supported: "' . $name . '" (apiClass: "' . $apiClass . '")');
@@ -186,5 +192,9 @@ class Client
     public function sign(): void
     {
         $this->getAuthenticationClient()->sign();
+    }
+
+    public function getRateLimits(): ?RateLimits {
+        return $this->lastApi ? $this->lastApi->getRateLimits() : null;
     }
 }

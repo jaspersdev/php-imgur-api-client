@@ -6,6 +6,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
+use Imgur\DTO\RateLimits;
 use Imgur\Middleware\AuthMiddleware;
 use Imgur\Middleware\ErrorMiddleware;
 use Psr\Http\Message\RequestInterface;
@@ -132,6 +133,10 @@ class HttpClient implements HttpClientInterface
         }
 
         return $responseBody['data'];
+    }
+
+    public function parseRateLimits( ResponseInterface $response ): RateLimits {
+        return RateLimits::fromHeaders( $response->getHeaders() );
     }
 
     /**

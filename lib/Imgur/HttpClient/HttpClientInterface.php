@@ -58,6 +58,12 @@ interface HttpClientInterface
     public function parseResponse(ResponseInterface $response): array;
 
     /**
+     * Parses the Imgur server response headers for RateLimits
+     */
+    public function parseRateLimits( ResponseInterface $response ): RateLimits;
+
+
+    /**
      * Push authorization middleware.
      *
      * @param array|null $token
