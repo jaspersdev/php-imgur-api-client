@@ -3,6 +3,7 @@
 namespace Imgur\Api;
 
 use Imgur\Client;
+use Imgur\DTO\RateLimits;
 use Imgur\Exception\InvalidArgumentException;
 use Imgur\Pager\PagerInterface;
 
