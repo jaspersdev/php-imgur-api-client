@@ -1,17 +1,22 @@
 {
-    "name": "j0k3r/php-imgur-api-client",
+    "name": "jaspersdev/php-imgur-api-client",
     "replace": {
         "adyg/php-imgur-api-client": "self.version"
     },
     "type": "library",
     "description": "Imgur API v3 client",
-    "homepage": "https://github.com/j0k3r/php-imgur-api-client",
+    "homepage": "https://github.com/jaspersdev/php-imgur-api-client",
     "keywords": [
         "imgur",
         "api"
     ],
     "license": "MIT",
     "authors": [
+        {
+            "name": "Rene Jaspers",
+            "email": "rene@jaspers.dev",
+            "homepage": "http://www.jaspers.dev"
+        },
         {
             "name": "Jeremy Benoist",
             "email": "jeremy.benoist@gmail.com",
