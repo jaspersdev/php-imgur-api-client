@@ -22,11 +22,21 @@ abstract class AbstractApi
      * @var PagerInterface
      */
     protected $pager;
+    
+    /**
+     * @var RateLimits
+     */
+    protected $rateLimits = null;
 
     public function __construct(Client $client, PagerInterface $pager = null)
     {
         $this->client = $client;
         $this->pager = $pager;
+    }
+
+    
+    public function getRateLimits(): ?RateLimits {
+        return $this->rateLimits;
     }
 
     /**
@@ -42,6 +52,7 @@ abstract class AbstractApi
         }
 
         $response = $httpClient->get($url, ['query' => $parameters]);
+        $this->rateLimits = $httpClient->parseRateLimits( $response );
 
         return $httpClient->parseResponse($response);
     }
@@ -54,6 +65,7 @@ abstract class AbstractApi
         $httpClient = $this->client->getHttpClient();
 
         $response = $httpClient->post($url, $parameters);
+        $this->rateLimits = $httpClient->parseRateLimits( $response );
 
         return $httpClient->parseResponse($response);
     }
@@ -66,6 +78,7 @@ abstract class AbstractApi
         $httpClient = $this->client->getHttpClient();
 
         $response = $httpClient->put($url, $parameters);
+        $this->rateLimits = $httpClient->parseRateLimits( $response );
 
         return $httpClient->parseResponse($response);
     }
@@ -78,6 +91,7 @@ abstract class AbstractApi
         $httpClient = $this->client->getHttpClient();
 
         $response = $httpClient->delete($url, $parameters);
+        $this->rateLimits = $httpClient->parseRateLimits( $response );
 
         return $httpClient->parseResponse($response);
     }
