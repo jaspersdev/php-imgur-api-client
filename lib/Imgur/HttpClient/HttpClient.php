@@ -121,7 +121,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritdoc}
      */
-    public function parseResponse(ResponseInterface $response)
+    public function parseResponse(ResponseInterface $response):array
     {
         $responseBody = [
             'data' => [],
@@ -131,7 +131,9 @@ class HttpClient implements HttpClientInterface
         if ((string) $response->getBody()) {
             $responseBody = json_decode($response->getBody(), true);
         }
-
+        if(is_scalar($responseBody['data'])){
+            return [ 'value' => $responseBody['data'] ];
+        }
         return $responseBody['data'];
     }
 
