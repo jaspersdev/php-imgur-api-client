@@ -121,7 +121,7 @@ class HttpClient implements HttpClientInterface
     /**
      * {@inheritdoc}
      */
-    public function parseResponse(ResponseInterface $response): array
+    public function parseResponse(ResponseInterface $response)
     {
         $responseBody = [
             'data' => [],
