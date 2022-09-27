@@ -57,7 +57,7 @@ interface HttpClientInterface
      * Parses the Imgur server response.
      * @return array|int
      */
-    public function parseResponse(ResponseInterface $response);
+    public function parseResponse(ResponseInterface $response):array;
 
     /**
      * Parses the Imgur server response headers for RateLimits
